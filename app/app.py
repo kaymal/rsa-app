@@ -93,6 +93,10 @@ def show_page(page: str):
             using an optimization algorithm. Yet again, however, for simplicity
             I've shown the observation that gives the maximum probability of success
             using the model.
+
+            As shown in the plots, given different `temperature ratio` values
+            (uncontrollable), we may select different values for
+            `rotational speed`/`torque` to achieve a higher probability of success.
             """
         )
         # create dataset for plotting
