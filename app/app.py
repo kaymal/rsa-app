@@ -5,12 +5,21 @@ import plotting
 import dataset
 
 
-def show_sidebar() -> str:
-    with st.sidebar:
-        options = ["Home", "Data"]
-        page = st.radio("Navigation", options)
+def show_sidebar(page: str | None = None) -> str:
+    # set default page
+    if (page is None) or ("home" in page.lower()):
+        index = 0
+    elif "data" in page.lower():
+        index = 1
+    else:
+        print("Page doesn't exist!")
+        index = 0
 
-        return page
+    with st.sidebar:
+        options = ["📈 Home", "📊 Data"]
+        selected_page = st.radio("Navigation", options, index=index)
+
+        return selected_page
 
 
 def show_page(page: str):
@@ -24,7 +33,8 @@ def show_page(page: str):
     # get a smaller set of data
     df = dataset.preprocessing(data)
 
-    if page == "Home":
+    if page == "📈 Home":
+        st.experimental_set_query_params()
         st.markdown(
             "## Feature Optimization Using Response Surface Analysis: A Simple Case Study"
         )
@@ -127,7 +137,8 @@ def show_page(page: str):
             as well selecting the best parameter values automatically within the system.
             """
         )
-    elif page == "Data":
+    elif page == "📊 Data":
+        st.experimental_set_query_params()
         st.markdown("## Full Dataset")
         st.markdown(
             """
@@ -164,5 +175,15 @@ def show_page(page: str):
 
 
 if __name__ == "__main__":
-    page = show_sidebar()
-    show_page(page)
+    # get page from query params
+    query_params = st.experimental_get_query_params()
+    if "page" in query_params:
+        page = query_params.get("page")[0]
+    else:
+        page = None
+
+    # show sidebar with page options
+    selected_page = show_sidebar(page=page)
+
+    # show selected page on the main container
+    show_page(selected_page)
