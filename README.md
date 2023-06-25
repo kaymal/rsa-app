@@ -4,3 +4,5 @@
 
 
 This repo shows how machine failure rate can be decreased through response surface analysis and optimization of parameters. The ML pipeline is simplified and most features are ignored for the purposes of this work.
+
+See the [app](https://kaymal.streamlit.app) for details.
