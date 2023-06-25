@@ -4,8 +4,20 @@ import streamlit as st
 import plotting
 import dataset
 
+st.set_page_config(
+    page_title="Process Optimization - ML - RSA",
+    page_icon="📈",
+    initial_sidebar_state="expanded",
+    menu_items={
+        "Get Help": "https://github.com/kaymal/rsa-app",
+        "Report a bug": "https://github.com/kaymal/rsa-app/issues",
+        "About": "Turgut Kaymal https://github.com/kaymal",
+    },
+)
+
 
 def show_sidebar(page: str | None = None) -> str:
+    """Show sidebar with navigation options."""
     # set default page
     if (page is None) or ("home" in page.lower()):
         index = 0
@@ -22,7 +34,7 @@ def show_sidebar(page: str | None = None) -> str:
         return selected_page
 
 
-def show_page(page: str):
+def show_page(page: str) -> None:
     """Show page depending on the selection from the sidebar.
 
     Parameters

@@ -40,6 +40,7 @@ def preprocessing(data: pd.DataFrame) -> pd.DataFrame:
 
 @st.cache_resource(ttl=TTL)
 def train(data: pd.DataFrame):
+    """Train a simple classifier model."""
     y = data["machine_failure"]
     X = data[["rotational_speed_rpm", "torque_nm", "temp_ratio"]]
 
